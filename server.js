@@ -1,8 +1,10 @@
 const express = require("express");
-
 const mongoose = require("mongoose");
+const cors = require('cors')
 
 const app = express();
+app.use(cors());
+app.use(express.json())
 
 mongoose
     .connect(
@@ -14,6 +16,9 @@ mongoose
     .then(() => {
         console.log("MongoDB Connected");
     });
+
+//http://localhost:5000/api/student
+app.use("/api/student", require("./routes/Student.route"))
 
 const PORT = process.env.PORT || 5000;
 
